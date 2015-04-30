@@ -5,7 +5,7 @@
 ## Example
 
 ``` js
-var tsconfig = require('gulp-tsconfig');
+var tsconfig = require('gulp-tsconfig-files');
 
 gulp.task('tsconfig_files', function () {
   gulp.src(['scripts/**/*.ts'])
