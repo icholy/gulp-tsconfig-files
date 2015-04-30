@@ -1,25 +1,18 @@
 {
-  "name": "gulp-using",
+  "name": "gulp-tsconfig-glob",
   "version": "0.0.1",
-  "description": "Lists all files used",
+  "description": "Update tsconfig files array with glob",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:jeromedecoster/gulp-using.git"
+    "url": "git@github.com:icholy/gulp-tsconfig-glob.git"
   },
-  "keywords": [
-    "gulpplugin",
-    "log",
-    "file",
-    "using"
-  ],
   "engines": {
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "chalk": "~0.4.0",
-    "map-stream": "~0.1.0"
+    "through": "^2.3.7"
   },
-  "author": "jeromedecoster",
+  "author": "icholy",
   "license": "MIT"
 }

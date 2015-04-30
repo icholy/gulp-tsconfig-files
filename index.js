@@ -1,24 +1,74 @@
-var chalk = require('chalk');
-var map   = require('map-stream');
+
+var through = require('through'),
+    fs      = require('fs'),
+    path    = require('path');
 
 module.exports = function(options) {
-  options = options || {};
 
-  var paths  = 'path relative'.split(' ');
-  var colors = 'black blue cyan gray green red white yellow'.split(' ');
+  if (typeof options === 'undefined') {
+    options = {};
+  }
 
-  options.prefix = options.prefix || 'Using file';
-  options.path   = paths.indexOf(options.path) != -1 ? options.path : 'cwd';
-  options.color  = colors.indexOf(options.color) != -1 ? options.color : 'magenta';
+  if (typeof options.path === 'undefined') {
+    options.path = 'tsconfig.json';
+  }
 
-  return map(function(file, cb) {
+  if (typeof options.indent === 'undefined') {
+    options.indent = 2;
+  }
 
-    var f = file.path.replace(file.cwd, '.');
-    if (options.path == 'relative') { f = file.relative; }
-    else if (options.path == 'path') { f = file.path; }
+  if (typeof options.absolute === 'undefined') {
+    options.absolute = false;
+  }
 
-    console.log('['+chalk.green('gulp')+']', options.prefix, chalk[options.color](f))
+  var readConfig = function (callback) {
+    fs.readFile(options.path, function (err, data) {
+      if (err) {
+        callback(err, null)
+      } else {
+        try {
+          callback(null, JSON.parse(data));
+        } catch (err) {
+          callback(err, null);
+        }
+      }
+    });
+  };
 
-    cb(null, file);
-  });
-}
+  var writeConfig = function (config, callback) {
+    try {
+      var data = JSON.stringify(config, null, options.indent);
+    } catch (err) {
+      callback(err);
+      return;
+    }
+    fs.writeFile(options.path, data, callback);
+  };
+
+  var files = [];
+
+  var handle = function (file) {
+    var filePath = file.path;
+    if (options.absolute) {
+      filePath = path.resolve(filePath);
+    } else {
+      filePath = path.relative('.', filePath);
+    }
+    files.push(filePath);
+    this.emit('data', file);
+  };
+
+
+  var end = function () {
+    var _this = this;
+    readConfig(function (err, config) {
+      if (err) { throw err; }
+      config.files = files;
+      writeConfig(config, function (err) {
+        if (err) { throw err; }
+      });
+    });
+  };
+
+  return through(handle, end);
+};
