@@ -1,18 +1,18 @@
-# Tsconfig Glob
+# Tsconfig Files
 
 > Populate the tsconfig `files` array using a glob
 
 ``` js
 
-var tsconfigGlob = require('gulp-tsconfig-glob');
+var tsconfig = require('gulp-tsconfig');
 
 gulp.task('tsconfig_files', function () {
   gulp.src(['scripts/**/*.ts'])
-    .pipe(tsconfigGlob({
-      absolute: true,        // default: false
-      path: 'tsconfig.json', // default: 'tsconfig.json'
-      indent: 2,             // default: 2
+    .pipe(tsconfig({
+      absolute: true,            // default: false
+      path:     'tsconfig.json', // default: 'tsconfig.json'
+      indent:   2,               // default: 2
     }));
-})
+});
 
 ```
