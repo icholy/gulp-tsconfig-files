@@ -11,7 +11,6 @@ gulp.task('tsconfig_files', function () {
   gulp.src(['scripts/**/*.ts'])
     .pipe(tsconfig());
 });
-
 ```
 
 ## Options
