@@ -21,6 +21,10 @@ module.exports = function(options) {
     options.absolute = false;
   }
 
+  if (typeof options.newline_eof === 'undefined') {
+    options.newline_eof = false;
+  }
+
   var readConfig = function (callback) {
     fs.readFile(options.path, function (err, data) {
       if (err) {
@@ -41,6 +45,9 @@ module.exports = function(options) {
     } catch (err) {
       callback(err);
       return;
+    }
+    if (options.newline_eof) {
+      data += "\n";
     }
     fs.writeFile(options.path, data, callback);
   };
