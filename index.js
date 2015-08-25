@@ -75,6 +75,7 @@ module.exports = function(options) {
         if (err) { throw err; }
       });
     });
+    this.emit('end');
   };
 
   return through(handle, end);
