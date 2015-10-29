@@ -3,7 +3,7 @@ var through = require('through'),
     fs      = require('fs'),
     path    = require('path');
 
-module.exports = function(options) {
+module.exports = function (options) {
 
   if (typeof options === 'undefined') {
     options = {};
