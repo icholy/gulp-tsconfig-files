@@ -25,6 +25,10 @@ module.exports = function(options) {
     options.newline_eof = false;
   }
 
+  if (typeof options.relative === 'undefined') {
+    options.relative = '.';
+  }
+
   var readConfig = function (callback) {
     fs.readFile(options.path, function (err, data) {
       if (err) {
@@ -59,7 +63,7 @@ module.exports = function(options) {
     if (options.absolute) {
       filePath = path.resolve(filePath);
     } else {
-      filePath = path.relative('.', filePath);
+      filePath = path.relative(options.relative, filePath);
     }
     files.push(filePath);
     this.emit('data', file);
