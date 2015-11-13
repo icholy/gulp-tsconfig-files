@@ -77,9 +77,9 @@ module.exports = function (options) {
       config.files = files;
       writeConfig(config, function (err) {
         if (err) { throw err; }
+        _this.emit('end');
       });
     });
-    this.emit('end');
   };
 
   return through(handle, end);
