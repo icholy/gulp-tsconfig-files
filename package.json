@@ -1,6 +1,6 @@
 {
   "name": "gulp-tsconfig-files",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Update tsconfig files array with glob",
   "main": "index.js",
   "repository": {

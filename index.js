@@ -13,6 +13,10 @@ module.exports = function (options) {
     options.path = 'tsconfig.json';
   }
 
+  if (typeof options.template === 'undefined') {
+    options.template = options.path;
+  }
+
   if (typeof options.indent === 'undefined') {
     options.indent = 2;
   }
@@ -30,7 +34,7 @@ module.exports = function (options) {
   }
 
   var readConfig = function (callback) {
-    fs.readFile(options.path, function (err, data) {
+    fs.readFile(options.template, function (err, data) {
       if (err) {
         callback(err, null)
       } else {
