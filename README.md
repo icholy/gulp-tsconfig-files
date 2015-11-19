@@ -19,6 +19,7 @@ gulp.task('tsconfig_files', function () {
 {
   absolute:     true,            // default: false
   path:         'tsconfig.json', // default: 'tsconfig.json'
+  template:     'blanktsconf.json' // default same as path
   indent:       2,               // default: 2
   newline_eof:  true,            // default: false
   relative_dir: 'some/folder/'   // default: '.'
