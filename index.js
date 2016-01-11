@@ -29,6 +29,10 @@ module.exports = function (options) {
     options.relative_dir = '.';
   }
 
+  if (typeof options.posix === 'undefined') {
+    options.posix = false;
+  }
+
   var readConfig = function (callback) {
     fs.readFile(options.path, function (err, data) {
       if (err) {
@@ -65,10 +69,12 @@ module.exports = function (options) {
     } else {
       filePath = path.relative(options.relative_dir, filePath);
     }
+    if (options.posix) {
+      filePath = path.posix.normalize(filePath);
+    }
     files.push(filePath);
     this.emit('data', file);
   };
-
 
   var end = function () {
     var _this = this;
