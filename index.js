@@ -6,7 +6,7 @@ var through = require('through'),
 var defaults = {
   path:         'tsconfig.json',
   index:        2,
-  newline_eof:  2,
+  newline_eof:  false,
   absolute:     false,
   relative_dir: '.',
   posix:        false
