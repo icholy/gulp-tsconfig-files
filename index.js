@@ -3,35 +3,26 @@ var through = require('through'),
     fs      = require('fs'),
     path    = require('path');
 
+var defaults = {
+  path:         'tsconfig.json',
+  index:        2,
+  newline_eof:  2,
+  absolute:     false,
+  relative_dir: '.',
+  posix:        false
+};
+
 module.exports = function (options) {
 
   if (typeof options === 'undefined') {
     options = {};
   }
 
-  if (typeof options.path === 'undefined') {
-    options.path = 'tsconfig.json';
-  }
-
-  if (typeof options.indent === 'undefined') {
-    options.indent = 2;
-  }
-
-  if (typeof options.absolute === 'undefined') {
-    options.absolute = false;
-  }
-
-  if (typeof options.newline_eof === 'undefined') {
-    options.newline_eof = false;
-  }
-
-  if (typeof options.relative_dir === 'undefined') {
-    options.relative_dir = '.';
-  }
-
-  if (typeof options.posix === 'undefined') {
-    options.posix = false;
-  }
+  Object.keys(defaults).forEach(function (key) {
+    if (typeof options[key] !== 'undefined') {
+      options[key] = defaults[key];
+    }
+  });
 
   var readConfig = function (callback) {
     fs.readFile(options.path, function (err, data) {
