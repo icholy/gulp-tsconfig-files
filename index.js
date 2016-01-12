@@ -5,7 +5,7 @@ var through = require('through'),
 
 var defaults = {
   path:         'tsconfig.json',
-  index:        2,
+  indent:       2,
   newline_eof:  false,
   absolute:     false,
   relative_dir: '.',
@@ -19,7 +19,7 @@ module.exports = function (options) {
   }
 
   Object.keys(defaults).forEach(function (key) {
-    if (typeof options[key] !== 'undefined') {
+    if (typeof options[key] === 'undefined') {
       options[key] = defaults[key];
     }
   });
