@@ -60,8 +60,8 @@ module.exports = function (options) {
     } else {
       filePath = path.relative(options.relative_dir, filePath);
     }
-    if (options.posix) {
-      filePath = path.posix.normalize(filePath);
+    if (options.posix && path.sep === '\\') {
+      filePath = filePath.replace(/\\/g, path.posix.sep);
     }
     files.push(filePath);
     this.emit('data', file);
