@@ -71,7 +71,7 @@ module.exports = function (options) {
     var _this = this;
     readConfig(function (err, config) {
       if (err) { throw err; }
-      config.files = files.sort();
+      config.files = files;
       writeConfig(config, function (err) {
         if (err) { throw err; }
         _this.emit('end');
