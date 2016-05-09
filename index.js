@@ -9,7 +9,8 @@ var defaults = {
   newline_eof:  false,
   absolute:     false,
   relative_dir: '.',
-  posix:        false
+  posix:        false,
+  sort:         true
 };
 
 module.exports = function (options) {
@@ -71,7 +72,11 @@ module.exports = function (options) {
     var _this = this;
     readConfig(function (err, config) {
       if (err) { throw err; }
-      config.files = files;
+      if (options.sort) {
+        config.files = files.sort();
+      } else {
+        config.files = files;
+      }
       writeConfig(config, function (err) {
         if (err) { throw err; }
         _this.emit('end');
