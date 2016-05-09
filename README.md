@@ -22,6 +22,7 @@ gulp.task('tsconfig_files', function () {
   indent:       2,               // default: 2
   newline_eof:  true,            // default: false
   relative_dir: 'some/folder/',  // default: '.'
-  posix:        true             // default: false
+  posix:        true,            // default: false
+  sort:         false            // default: true
 }
 ```
