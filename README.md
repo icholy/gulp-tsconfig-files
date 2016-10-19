@@ -2,6 +2,8 @@
 
 > Populate the tsconfig `files` array using a glob
 
+## Note: TypeScript 2 supports using globs in `tsconfig.json`
+
 ## Example
 
 ``` js
